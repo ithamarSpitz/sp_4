@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <functional>
 #include <string>
+#include <iostream>
 
 template <typename T, int K = 2>
 class Tree

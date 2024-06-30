@@ -16,7 +16,7 @@ This project implements a generic tree data structure in C++ with various traver
 
 ## File Descriptions
 
-### Tree.hpp
+### Tree.hpp and Tree.tpp
 
 Contains the implementation of the `Tree<T, K>` class template.
 
@@ -31,7 +31,7 @@ Key functions:
   - `begin_bfs_scan()` / `end_bfs_scan()`: Breadth-first search traversal
   - `begin_dfs_scan()` / `end_dfs_scan()`: Depth-first search traversal
 - `myHeap()`: Creates a heap from the tree (for binary trees only)
-- `print(std::string fileName)`: Generates a visual representation of the tree
+- `print(std::string fileName)`: Generates a visual representation of the tree using graphviz, DOT lang and inkview
 - `to_string()`: Returns a string representation of the tree
 
 ### Complex.hpp and Complex.cpp
@@ -72,6 +72,3 @@ make
 
 5. Clean up compiled files:
 make clean
-
-Note: The project uses Qt libraries for visualization. Make sure you have Qt5 development libraries installed on your system.
-This README provides an overview of the project structure, explains the main classes and their key functions, and includes instructions for compiling and running the project.

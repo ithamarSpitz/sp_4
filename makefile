@@ -1,25 +1,25 @@
-QTFLAGS = -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/x86_64-linux-gnu/qt5
-QTLIBS = -lQt5Widgets -lQt5Gui -lQt5Core -pthread
-CXXFLAGS = -std=c++11 -fPIC  -pthread
+CXXFLAGS = -std=c++11 -fPIC -pthread
 
 tree: main.o Complex.o Tree.o
-	g++ $(CXXFLAGS) main.o Complex.o Tree.o -o main $(QTLIBS)
+	g++ $(CXXFLAGS) main.o Complex.o Tree.o -o main
 	./main
 
 main.o: main.cpp Tree.hpp Complex.hpp
-	g++ $(CXXFLAGS) $(QTFLAGS) -c main.cpp
+	g++ $(CXXFLAGS) -c main.cpp
 
 demo: demo.o Complex.o
-	g++ $(CXXFLAGS) demo.o Complex.o -o demo $(QTLIBS)
+	g++ $(CXXFLAGS) demo.o Complex.o -o demo
+	./demo
 
 demo.o: demo.cpp Tree.hpp Complex.hpp
-	g++ $(CXXFLAGS) $(QTFLAGS) -c demo.cpp
+	g++ $(CXXFLAGS) -c demo.cpp
 
 tests: tests.o Complex.o
-	g++ $(CXXFLAGS) tests.o Complex.o -o tests $(QTLIBS)
+	g++ $(CXXFLAGS) tests.o Complex.o -o tests
+	./tests
 
 tests.o: tests.cpp Tree.hpp Complex.hpp
-	g++ $(CXXFLAGS) $(QTFLAGS) -c tests.cpp
+	g++ $(CXXFLAGS) -c tests.cpp
 
 Complex.o: Complex.cpp Complex.hpp
 	g++ $(CXXFLAGS) -c Complex.cpp

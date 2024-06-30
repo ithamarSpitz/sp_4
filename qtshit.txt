@@ -1,0 +1,80 @@
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QGraphicsScene>
+#include <QtWidgets/QGraphicsView>
+#include <QtWidgets/QGraphicsEllipseItem>
+#include <QtWidgets/QGraphicsTextItem>
+
+void printQT(QMainWindow* window) const {
+    QGraphicsScene* scene = new QGraphicsScene(window);
+    QGraphicsView* view = new QGraphicsView(scene, window);
+    window->setCentralWidget(view);
+
+    const qreal scaleFactor = 1;  // Scale factor for making everything 3 times larger
+    const qreal nodeSize = 200 * scaleFactor;  // 3 times the original node size
+    const qreal textOffset = 100 * scaleFactor;  // 3 times the original text offset
+    const qreal initialXOffset = 200 * scaleFactor;  // 3 times the original x offset
+    const qreal initialYOffset = 100 * scaleFactor;  // 3 times the original y offset
+
+    std::function<void(Node*, qreal, qreal, qreal, qreal)> drawNode = 
+    [&](Node* node, qreal x, qreal y, qreal xOffset, qreal yOffset) {
+        if (node) {
+            // Draw node (3 times larger)
+            QGraphicsEllipseItem *ellipse = scene->addEllipse(x - nodeSize / 2, y - nodeSize / 2, nodeSize, nodeSize);
+            ellipse->setBrush(Qt::white);
+
+            // Add text to node (3 times larger font)
+            QGraphicsTextItem *text = scene->addText(QString::number(node->data));
+            QFont font = text->font();
+            font.setPointSize(font.pointSize() * scaleFactor);
+            text->setFont(font);
+            text->setPos(x - textOffset / 2, y - textOffset / 2);
+
+            // Draw lines to children
+            qreal childX = x - 200;
+            qreal childY = y + 200;
+            qreal newXOffset = 200;
+            
+            for (Node* child : node->children) {
+                scene->addLine(x, y + nodeSize / 2, childX, childY - nodeSize / 2);
+                drawNode(child, childX, childY, newXOffset, yOffset);
+                childX += xOffset;
+            }
+        }
+    };
+
+    // Start drawing from root (with increased spacing to make distances 3 times bigger)
+    drawNode(root, 0, 0, initialXOffset, initialYOffset);
+
+    // Center the view on the scene
+    view->fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
+    view->setRenderHint(QPainter::Antialiasing);
+}
+
+
+
+    // void print() const
+    // {
+    //     if (!root)
+    //     {
+    //         std::cerr << "Empty tree" << std::endl;
+    //         return;
+    //     }
+
+    //     std::function<void(Node *, std::string, bool)> printNode = [&](Node *node, std::string prefix, bool isLast)
+    //     {
+    //         if (node)
+    //         {
+    //             std::cout << prefix;
+    //             std::cout << (isLast ? "└── " : "├── ");
+    //             std::cout << node->data << std::endl;
+
+    //             for (size_t i = 0; i < node->children.size(); ++i)
+    //             {
+    //                 printNode(node->children[i], prefix + (isLast ? "    " : "│   "), i == node->children.size() - 1);
+    //             }
+    //         }
+    //     };
+
+    //     printNode(root, "", true);
+    // }

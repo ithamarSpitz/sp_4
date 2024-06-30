@@ -52,9 +52,6 @@ int main()
     cout << endl;
     // same as BFS: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6
 
-    // cout << Tree; // Should print the graph using GUI.
-
-
     Tree<double, 3> trinaryTree;
     auto root3 = trinaryTree.add_root(1.1);
     auto left3 = trinaryTree.add_sub_node(root3, 1.2);
@@ -72,8 +69,4 @@ int main()
      *   /        |
      *  1.5      1.6
      */
-    // sudo apt install libcanberra-gtk-module libcanberra-gtk3-module
-    // sudo apt-get install inkscape
-    // sudo apt install graphviz
-
 }

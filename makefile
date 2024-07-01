@@ -1,3 +1,4 @@
+#itas12@gmail.com
 CXXFLAGS = -std=c++11 -fPIC -pthread
 
 tree: main.o Complex.o Tree.o

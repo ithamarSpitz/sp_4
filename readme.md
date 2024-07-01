@@ -1,3 +1,4 @@
+itas12@gmail.com
 # Tree Data Structure Project
 
 This project implements a generic tree data structure in C++ with various traversal methods and visualization capabilities.

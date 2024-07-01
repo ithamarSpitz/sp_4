@@ -1,6 +1,5 @@
-/**
- * Demo app for Ex4
- */
+//itas12@gmail.com
+
 #include <iostream>
 #include <string>
 #include "Tree.hpp"
